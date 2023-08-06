@@ -15,3 +15,11 @@ def create_project(
         payload: dict,
         service: ProjectService = Depends(Provide[Container.project_service])):
     return service.create_project(payload)
+
+
+@router.get('/{project_id}')
+@inject
+def get_project(
+        project_id: str,
+        service: ProjectService = Depends(Provide[Container.project_service])):
+    return service.get_project(project_id)

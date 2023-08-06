@@ -1,4 +1,5 @@
 import os
+import uuid
 
 import httpx
 
@@ -32,3 +33,18 @@ class TestItCRUDProject(TestAbstractIntegration):
         assert response['project_id'] is not None
         assert response['project_name'] == 'my projects'
         assert response['nifi_uri'] == 'http://localhost:8080'
+
+    def test_get_project_by_id_should_return_the_project_found(self):
+        response = self.client.get(f'/projects/{self.project.project_id}').json()
+
+        assert response is not None
+        assert response['project_id'] == self.project.project_id
+
+    def test_get_should_return_error_project_not_found_when_project_id_not_exist(self):
+        project_id = str(uuid.uuid4())
+        response = self.client.get(f'/projects/{project_id}')
+
+        assert response.status_code == 404
+        assert response.json()['title'] == 'NOT_FOUND'
+        assert response.json()['status'] == 404
+        assert response.json()['detail'] == f'Project {project_id} not found.'
