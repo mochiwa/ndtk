@@ -9,14 +9,14 @@ class FileManager:
         self._root_path = os.path.join(root_path, FileManager.PROJECT_DIR)
         os.makedirs(self._root_path, exist_ok=True)
 
+    @property
+    def root_dir(self) -> str:
+        return self._root_path
+
     def create_dir(self, path: str, ok_exist: bool = True):
         full_path = f"{self._root_path}/{path}"
         os.makedirs(full_path, exist_ok=ok_exist)
         return full_path
-
-    @property
-    def root_dir(self) -> str:
-        return self._root_path
 
     def write_file(self, path: str, filename: str, content: str):
         with open(os.path.join(self._root_path, path, filename), 'w') as file:

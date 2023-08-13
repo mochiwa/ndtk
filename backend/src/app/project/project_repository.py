@@ -1,9 +1,10 @@
 import uuid
+from abc import ABC
 
 from app.project.project import Project
 
 
-class ProjectRepository:
+class ProjectRepository(ABC):
 
     def save(self, project: Project) -> Project:
         raise NotImplementedError()

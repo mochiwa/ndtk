@@ -11,22 +11,17 @@ class ProjectService:
         self._repository = project_repository
 
     def create_project(self, request: {}) -> Project:
-        project_id = uuid.uuid4()
-        project = Project(str(project_id),
-                          request['project_name'],
-                          request['nifi_uri'])
+        project = Project(str(uuid.uuid4()), request['project_name'], request['nifi_uri'])
+        return self._repository.save(project)
 
-        self._repository.save(project)
-        return project
-
-    def get_project(self, project_id: str):
+    def get_project(self, project_id: str) -> Project:
         project = self._repository.get(project_id)
         if project is None:
             raise ProjectNotFoundException(project_id)
         return project
 
-    def get_all_project(self):
+    def get_all_project(self) -> [Project]:
         return self._repository.get_all()
 
-    def delete_project(self, project_id: str):
+    def delete_project(self, project_id: str) -> None:
         self._repository.delete(project_id)

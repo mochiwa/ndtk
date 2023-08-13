@@ -70,4 +70,4 @@ class TestProjectRepositoryJson:
 
         self.repository.delete(project.project_id)
 
-        assert os.path.exists(os.path.join(tmp_path,f"projects/{project.project_id}")) is False
+        assert os.path.exists(os.path.join(tmp_path, f"projects/{project.project_id}")) is False

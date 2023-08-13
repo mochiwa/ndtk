@@ -13,7 +13,6 @@ class Container(containers.DeclarativeContainer):
         FileManager,
         config.provided['APP']['projects_directory']
     )
-
     project_repository = providers.Factory(
         ProjectRepositoryJson,
         file_manager

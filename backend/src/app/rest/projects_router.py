@@ -32,9 +32,9 @@ def get_all_project(
     return service.get_all_project()
 
 
-@router.delete('/{project_id}')
+@router.delete('/{project_id}', status_code=200)
 @inject
-def get_all_project(
+def delete_project(
         project_id: str,
         service: ProjectService = Depends(Provide[Container.project_service])):
     service.delete_project(project_id)
