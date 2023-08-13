@@ -9,7 +9,7 @@ from container import Container
 def create_app(container: Container) -> FastAPI:
     app = FastAPI()
     app.container = container
-    container.file_manager.provided().create_dir('projects')
+    container.file_manager.provided().create_dir('')
     app.include_router(projects_router)
     add_exception_handler(app)
     return app

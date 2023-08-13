@@ -14,11 +14,11 @@ class TestAbstractIntegration:
     container.config.from_ini(os.path.join(os.path.dirname(__file__), 'config.ini'))
     app = create_app(container)
     client = TestClient(app)
+    project_repository = container.project_repository.provided()
     project: Project = None
 
     def setup(self):
-        self.project = ProjectMother.create()
-        self.container.project_repository.provided().save(self.project)
+        self.project = self.project_repository.save(ProjectMother.create())
 
     def teardown(self):
         shutil.rmtree("./tmp")

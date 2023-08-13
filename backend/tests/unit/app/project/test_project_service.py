@@ -1,3 +1,5 @@
+import uuid
+
 import pytest
 from mockito import mock, when, verify, ANY
 
@@ -56,3 +58,18 @@ class TestProjectService:
 
         assert isinstance(exception.value, ProjectNotFoundException)
         assert isinstance(exception.value, NotFoundException)
+
+    def test_get_all_projects_should_cal_get_all_from_repository(self):
+        when(self.repository).get_all().thenReturn([])
+
+        output = self.service.get_all_project()
+
+        assert output == []
+
+        verify(self.repository).get_all()
+
+    def test_delete_project_should_delete_project_from_repository(self):
+        project_id = str(uuid.uuid4())
+
+        when(self.repository).delete(uuid).thenReturn(None)
+        self.service.delete_project(project_id)

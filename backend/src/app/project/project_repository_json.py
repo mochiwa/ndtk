@@ -17,7 +17,16 @@ class ProjectRepositoryJson(ProjectRepository):
         return project
 
     def get(self, project_id: uuid) -> Project | None:
-        if self._file.exist(project_id) is False:
+        try:
+            stream = self._file.read_file(project_id, 'project.json')
+            return Project(**json.loads(stream))
+        except:
             return None
-        stream = self._file.read_file(project_id, 'project.json')
-        return Project(**json.loads(stream))
+
+    def get_all(self) -> [Project]:
+        if self._file.exist('/') is False:
+            return []
+        return [self.get(project_id) for project_id in self._file.list_dir()]
+
+    def delete(self, project_id: str):
+        self._file.delete_directory(project_id)

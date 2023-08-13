@@ -4,6 +4,7 @@ import uuid
 import httpx
 
 from integration.abstract_integration_test import TestAbstractIntegration
+from unit.app.project.project_mother import ProjectMother
 
 
 class TestItCRUDProject(TestAbstractIntegration):
@@ -48,3 +49,24 @@ class TestItCRUDProject(TestAbstractIntegration):
         assert response.json()['title'] == 'NOT_FOUND'
         assert response.json()['status'] == 404
         assert response.json()['detail'] == f'Project {project_id} not found.'
+
+    def test_get_all_should_return_all_projects(self):
+        response = self.client.get(f'/projects')
+
+        assert response.status_code == 200
+        assert len(response.json()) == 1
+        assert response.json()[0]['project_id'] == self.project.project_id
+
+    def test_delete_should_delete_project_from_repository(self):
+        project = self.project_repository.save(ProjectMother.create())
+        response = self.client.delete(f'/projects/{project.project_id}')
+
+        assert response.status_code == 200
+        assert self.project_repository.get(project.project_id) is None
+
+    def test_delete_should_return_200_when_not_project_found_to_delete(self):
+        project_id = uuid.uuid4()
+        response = self.client.delete(f'/projects/{project_id}')
+
+        assert response.status_code == 200
+        assert self.project_repository.get(project_id) is None
