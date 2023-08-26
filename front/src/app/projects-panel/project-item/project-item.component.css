@@ -1,0 +1,27 @@
+mat-card-header{
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+  padding:  5px 0;
+}
+.title-area {
+  display: flex;
+  justify-content: left;
+  padding: 0;
+}
+
+mat-icon {
+  cursor: pointer;
+}
+.action-area{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.action-area>button{
+  width: 30px!important;
+  min-width: unset!important;
+}
+mat-card-title{
+  font-size: 15px;
+}

@@ -1,0 +1,22 @@
+.projects-panel{
+  display: flex;
+  flex-direction: column;
+}
+
+header{
+  display: flex;
+  flex-direction: row;
+}
+
+header>input{
+  width: 150px;
+  border-radius: 0;
+}
+
+header>button{
+  width: 50px!important;
+  min-width: unset!important;
+}
+
+
+
