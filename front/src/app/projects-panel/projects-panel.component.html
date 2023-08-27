@@ -1,0 +1,11 @@
+<div class="projects-panel">
+  <h1 align="center">Projects</h1>
+  <header>
+    <input matInput placeholder="Search..."
+           (keyup)="search($event)">
+    <button mat-raised-button color="primary" (click)="addProject()">+</button>
+  </header>
+  <main>
+    <app-project-item  *ngFor="let project of projects$ | async;" [project]="project"/>
+  </main>
+</div>

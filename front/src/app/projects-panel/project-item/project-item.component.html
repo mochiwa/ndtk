@@ -1,0 +1,22 @@
+<mat-card>
+  <div class="header">
+    <div class="header-left">
+      <mat-icon (click)="collapsed=!collapsed ; $event.stopPropagation();">
+        {{ !collapsed ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+      </mat-icon>
+      <h1>{{project.project_name}}</h1>
+    </div>
+    <div class="header-right">
+      <button mat-raised-button color="primary">+</button>
+      <button mat-raised-button color="accent">R</button>
+      <button mat-raised-button color="warn" (click)="delete()">x</button>
+    </div>
+  </div>
+  <mat-card-content *ngIf="!collapsed" >
+    <ul>
+      <li>test 1</li>
+      <li>test 2</li>
+      <li>test 3</li>
+    </ul>
+  </mat-card-content>
+</mat-card>

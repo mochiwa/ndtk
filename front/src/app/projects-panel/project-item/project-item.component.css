@@ -1,0 +1,24 @@
+.header{
+  display: flex;
+  padding:  5px 0;
+  justify-content: space-between;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid black;
+}
+  .header-left {
+    display: flex;
+  }
+  .header-left>mat-icon{
+    padding: 10px 5px 0;
+    height: 100%;
+    cursor: pointer;
+  }
+  .header-left>h1{
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+.header-right>button{
+  width: 30px!important;
+  min-width: unset!important;
+}
