@@ -2,12 +2,13 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {CreateProjectRequest, Project} from "../model/Project";
 import {Observable} from "rxjs";
+import {config} from "../../../config";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackendService {
-  private url = "http://localhost:8080"
+  private url = config.backendUrl;
   private header = new HttpHeaders({'Content-Type': 'application/json'})
 
   constructor(private http: HttpClient) {
