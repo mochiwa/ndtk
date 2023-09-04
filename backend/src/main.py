@@ -2,7 +2,7 @@ import uvicorn
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
-from app.rest import projects_router
+from app.rest import projects_router, flow_router
 from app.rest.exception_handler import add_exception_handler
 from container import Container
 
@@ -12,6 +12,7 @@ def create_app(container: Container) -> FastAPI:
     app.container = container
     container.file_manager.provided().create_dir('')
     app.include_router(projects_router)
+    app.include_router(flow_router)
     add_exception_handler(app)
     app.add_middleware(
         CORSMiddleware,

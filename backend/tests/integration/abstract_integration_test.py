@@ -1,6 +1,7 @@
 import os.path
 import shutil
 
+import httpx
 from starlette.testclient import TestClient
 
 from app.project.project import Project
@@ -25,3 +26,9 @@ class TestAbstractIntegration:
 
     def test_should_create_projects_dir_when_application_start(self):
         assert os.path.exists("./tmp/projects") is True
+
+    def _assert_error(self, response: httpx.Response, code: int, title: str, message: str):
+        assert response.status_code == code
+        assert response.json()['status'] == code
+        assert response.json()['title'] == title
+        assert response.json()['detail'] == message
