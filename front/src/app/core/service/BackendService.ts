@@ -27,8 +27,15 @@ export class BackendService {
     })
   }
 
-  public deleteProject(project_id: string): Observable<HttpResponse<any>>  {
-    return this.http.delete(`${this.url}/projects/${project_id}`,{
+  public deleteProject(project_id: string): Observable<HttpResponse<any>> {
+    return this.http.delete(`${this.url}/projects/${project_id}`, {
+      headers: this.header,
+      observe: 'response'
+    })
+  }
+
+  public getFlow(project_id: string, flow_id: string = 'root'): Observable<HttpResponse<any>> {
+    return this.http.get(`${this.url}/nifi/${project_id}/flow/${flow_id}`, {
       headers: this.header,
       observe: 'response'
     })
