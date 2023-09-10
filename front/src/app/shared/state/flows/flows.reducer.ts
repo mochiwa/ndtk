@@ -18,7 +18,7 @@ export const reducer = createReducer(
   on(fetched, (state, action) => {
       return {
         ...state,
-        flow: action.flow,
+        flows: action.flow,
         isLoading: false
       }
     }

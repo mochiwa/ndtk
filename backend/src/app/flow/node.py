@@ -7,3 +7,4 @@ class Node:
     x: float
     y: float
     type: str
+    name:str

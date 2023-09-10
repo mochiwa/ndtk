@@ -7,7 +7,8 @@ export interface Node{
   "id": string,
   "x": number,
   "y": number,
-  "type": string
+  "type": string,
+  "name": string,
 }
 
 

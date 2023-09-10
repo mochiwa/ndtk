@@ -29,7 +29,6 @@ def mapping_flow(entity: ProcessGroupFlowEntity):
     input_ports = factory(entity.process_group_flow.flow.input_ports)
     output_ports = factory(entity.process_group_flow.flow.output_ports)
     funnels = factory(entity.process_group_flow.flow.funnels)
-
     return Flow(
         id=entity.process_group_flow.id,
         nodes=[*process_groups, *processors, *remote_process_groups, *input_ports, *output_ports, *funnels]
@@ -41,4 +40,5 @@ def map_entity(entity, entity_type: str):
         id=entity.id,
         type=entity_type,
         x=entity.position.x,
-        y=entity.position.y)
+        y=entity.position.y,
+        name=getattr(entity.component,'name','') )
